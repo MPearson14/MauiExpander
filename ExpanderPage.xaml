@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:dataTemplateSelector="clr-namespace:MauiExpander.Views.TemplateSelectors;assembly=MauiExpander"
+             x:Class="MauiExpander.ExpanderPage"
+             Shell.TabBarIsVisible="False"
+             Shell.NavBarIsVisible="True"
+             xmlns:viewmodels="clr-namespace:MauiExpander.ViewModels"
+             x:DataType="viewmodels:ExpanderViewModel"
+             x:Name="ExpanderViewPage">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="CaourselStepOne">
+            <Grid>
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout Margin="25, 0, 25, 15">
+                            <Frame BorderColor="{StaticResource GrayColor}" CornerRadius="5" Padding="8" HasShadow="False">
+                                <toolkit:Expander x:Name="FirstExpander" IsExpanded="True">
+                                    <toolkit:Expander.Header>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0" Text="Expander One" />
+                                            <Image Grid.Column="1" Source="expand.png" HorizontalOptions="End" VerticalOptions="Start" HeightRequest="20" WidthRequest="20">
+                                                <Image.Behaviors>
+                                                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource LightModeImageTintColor}, Dark={StaticResource DarkModeImageTintColor}}" />
+                                                </Image.Behaviors>
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image" Binding="{Binding Source={RelativeSource AncestorType={x:Type toolkit:Expander}}, Path=IsExpanded}" Value="True">
+                                                        <Setter Property="Source" Value="collapse.png" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                        </Grid>
+                                    </toolkit:Expander.Header>
+
+                                    <VerticalStackLayout Padding="10">
+                                        <Label Text="Entry 1" Margin="0, 20, 0, 0" HorizontalOptions="Fill" />
+                                        <Entry HorizontalOptions="Fill" />
+                                        <Label 
+                                            Style="{StaticResource ErrorDescriptionStyle}"
+                                            Text="{Binding BindingContext.Entry1Error, Source={x:Reference ExpanderViewPage}}"
+                                            TextColor="Red"
+                                            IsVisible="{Binding BindingContext.IsEntry1ErrorVisible, Source={x:Reference ExpanderViewPage}}" 
+                                            Margin="4, 0, 0, 0" />
+
+                                        <Label Text="Entry 2" Margin="0, 20, 0, 0" HorizontalOptions="Fill" />
+                                        <Editor 
+                                            AutoSize="TextChanges"
+                                            Style="{StaticResource BodyTextStyleEditor}"
+                                            Placeholder="Entry 2"
+                                            MaxLength="1000"
+                                            HorizontalOptions="{OnIdiom Desktop='Center', Tablet='Center', Phone='FillAndExpand'}">
+                                            <Editor.WidthRequest>
+                                                <OnIdiom x:TypeArguments="x:Double" Desktop="350" Tablet="320" Phone="320" />
+                                            </Editor.WidthRequest>
+                                        </Editor>
+                                    </VerticalStackLayout>
+                                </toolkit:Expander>
+                            </Frame>
+                        </StackLayout>
+
+                        <StackLayout Margin="25, 0, 25, 15">
+                            <Frame BorderColor="{StaticResource GrayColor}" CornerRadius="5" Padding="8" HasShadow="False">
+                                <toolkit:Expander x:Name="SecondExpander" IsExpanded="False">
+                                    <toolkit:Expander.Header>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0" 
+                                                   Text="Expander Two" />
+
+                                            <Image Grid.Column="1" Source="expand.png" HorizontalOptions="End" VerticalOptions="Start" HeightRequest="20" WidthRequest="20">
+                                                <Image.Behaviors>
+                                                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource LightModeImageTintColor}, Dark={StaticResource DarkModeImageTintColor}}" />
+                                                </Image.Behaviors>
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image" Binding="{Binding Source={RelativeSource AncestorType={x:Type toolkit:Expander}}, Path=IsExpanded}" Value="True">
+                                                        <Setter Property="Source" Value="collapse.png" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                        </Grid>
+                                    </toolkit:Expander.Header>
+
+                                    <VerticalStackLayout Padding="10">
+                                        <Label Text="Entry 1" Margin="0, 20, 0, 0" HorizontalOptions="Fill" />
+                                        <Entry HorizontalOptions="Fill" />
+
+                                        <Label Text="Entry 2" Margin="0, 20, 0, 0" HorizontalOptions="Fill" />
+                                        <Entry HorizontalOptions="Fill" />
+
+                                        <Label Text="Entry 3" Margin="0, 20, 0, 0" HorizontalOptions="Fill" />
+                                        <Entry HorizontalOptions="Fill" />
+                                    </VerticalStackLayout>
+                                </toolkit:Expander>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="CaourselStepTwo">
+            <Grid>
+                <ScrollView Grid.Row="0">
+                    <StackLayout>
+                        <StackLayout Margin="25, 0, 25, 15">
+                            <Frame BorderColor="{StaticResource GrayColor}" CornerRadius="5" Padding="8" HasShadow="False">
+                                <toolkit:Expander x:Name="FirstExpander" IsExpanded="True">
+                                    <toolkit:Expander.Header>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0" Text="Expander Three" />
+
+                                            <Image Grid.Column="1" Source="expand.png" HorizontalOptions="End" VerticalOptions="Start" HeightRequest="20" WidthRequest="20">
+                                                <Image.Behaviors>
+                                                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource LightModeImageTintColor}, Dark={StaticResource DarkModeImageTintColor}}" />
+                                                </Image.Behaviors>
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image" Binding="{Binding Source={RelativeSource AncestorType={x:Type toolkit:Expander}}, Path=IsExpanded}" Value="True">
+                                                        <Setter Property="Source" Value="collapse.png" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                        </Grid>
+                                    </toolkit:Expander.Header>
+
+                                    <VerticalStackLayout Padding="10">
+                                        <Label Text="Entry 1" Margin="0, 20, 0, 0" HorizontalOptions="Fill" />
+                                        <Entry HorizontalOptions="Fill" />
+
+                                        <Label Text="Entry 2" Margin="0, 20, 0, 0" HorizontalOptions="Fill" />
+                                        <Entry HorizontalOptions="Fill" />
+                                    </VerticalStackLayout>
+                                </toolkit:Expander>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </DataTemplate>
+
+        <dataTemplateSelector:ExpanderDataTemplateSelector x:Key="CarouselSelector"
+                                                   StepOne="{StaticResource CaourselStepOne}"
+                                                   StepTwo="{StaticResource CaourselStepTwo}">
+        </dataTemplateSelector:ExpanderDataTemplateSelector>
+    </ContentPage.Resources>
+
+    <Shell.TitleView>
+        <VerticalStackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Label                         
+            Text="Test Expander"
+            TextColor="{StaticResource WhiteColor}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            LineBreakMode="NoWrap"
+            Margin="10, 10, 10, 10" />
+        </VerticalStackLayout>
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Carousel -->
+            <Grid Margin="0, 20, 0, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="9*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <CarouselView Grid.Row="0" x:Name="CarouselControl" ItemsSource="{Binding CarouselData}" ItemTemplate="{StaticResource CarouselSelector}" 
+                              CurrentItemChangedCommand="{Binding CarouselItemChangedCommand}"
+                              CurrentItemChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=CurrentItem}"
+                              IndicatorView="IndicatorViewControl"                             
+                              AutomationId="carouselControl"
+                              Loop="False" />
+
+                <IndicatorView x:Name="IndicatorViewControl" Grid.Row="1" IndicatorColor="LightGray"  SelectedIndicatorColor="DarkGray" 
+                               HorizontalOptions="Center" VerticalOptions="Fill" IndicatorSize="8.0" AutomationId="carouselIndicator"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
